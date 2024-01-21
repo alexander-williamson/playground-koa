@@ -6,12 +6,12 @@
   "scripts": {
     "dev": "ts-node ./server.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prebuild": "tsc --build --clean",
-    "build": "npm run build:tsc && npm run build:copy-packages && npm run build:install && build:zip",
-    "build:tsc": "tsc --build",
+    "prebuild": "shx rm -rf ./dist",
+    "build": "npm run build:tsc && npm run build:copy-packages && npm run build:install && npm run build:zip",
+    "build:tsc": "tsc --build --clean && tsc --build",
     "build:copy-packages": "shx cp package.json ./dist && shx cp package-lock.json ./dist",
-    "build:install": "cd ./dist && npm ci --only=production",
-    "build:zip": "zip-build ./dist --name dist.zip"
+    "build:install": "cd ./dist && npm ci",
+    "build:zip": "npx zip-build ./dist --name dist.zip"
   },
   "keywords": [],
   "author": "",
@@ -35,6 +35,7 @@
     "@types/node": "^20.11.5",
     "npm-build-zip": "^1.0.4",
     "shx": "^0.3.4",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "zip-build": "^1.8.0"
   }
 }
