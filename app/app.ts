@@ -17,3 +17,5 @@ app.listen(3000, () => {
   console.info("Koa started")
   console.info("http://localhost:3000")
 });
+
+export default app;
