@@ -1,4 +1,4 @@
-# Koa Playground - Hello world
+# Playground - Koa Hello world
 
 Example Typescript server that runs Koa and uses types from `@types/koa`, `@types/koa-json`, `@types/koa-logger` and `@types/koa-router`.
 
