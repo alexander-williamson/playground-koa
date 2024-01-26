@@ -1,5 +1,4 @@
 import Koa from "koa";
-import Router from "koa-router";
 
 import json from "koa-json";
 import logger from "koa-logger";
@@ -10,13 +9,6 @@ const router = routes;
 
 app.use(json());
 app.use(logger());
-
-// routing
-// todo pull this out into a separate local-server.ts file
 app.use(router());
-app.listen(3000, () => {
-  console.info("Koa started")
-  console.info("http://localhost:3000")
-});
 
 export default app;

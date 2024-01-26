@@ -1,35 +1,27 @@
 import joi from "joi";
 import body from "koa-body";
-import Router from 'koa-router';
-import { SetValidationError } from '../helpers';
-import logger from "koa-logger"
+import Router from "koa-router";
+import { SetValidationError } from "../helpers";
+import logger from "koa-logger";
+import { PostUsersResponseBody } from "../contracts/PostUsersResponseBody";
+import { Validator } from "../contracts/PostUsersRequestBody";
 
-const router = new Router({ prefix: '/users' })
-
-type User = {
-  name: string;
-  age?: number;
-}
+const router = new Router({ prefix: "/users" });
 
 router.post("/", body(), async (ctx, next) => {
-  console.log({ context: ctx, "handler": "users-post" })
-
-  const { error, value } = joi.object({
-    name: joi.string().required(),
-    age: joi.number().integer().optional()
-  }).required()
-    .validate(ctx.request.body);
-
+  console.log({ context: ctx, handler: "users-post" });
+  
+  // validate the request
+  const { value, error } = Validator.validate(ctx.request.body);
   if (error) {
-    SetValidationError(ctx, error.message)
+    SetValidationError(ctx, error.message);
     return;
   }
-
-  const response: User = {
+// ensure the response type
+  const response: PostUsersResponseBody = {
     name: value.name,
-    age: value.age
-  }
-
+    age: value.age,
+  };
   ctx.body = response;
 });
 
