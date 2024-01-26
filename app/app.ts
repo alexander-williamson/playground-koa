@@ -12,6 +12,7 @@ app.use(json());
 app.use(logger());
 
 // routing
+// todo pull this out into a separate local-server.ts file
 app.use(router());
 app.listen(3000, () => {
   console.info("Koa started")
