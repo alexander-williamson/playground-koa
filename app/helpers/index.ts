@@ -3,7 +3,7 @@ import Koa from "koa";
 export function SetValidationError(ctx: Koa.ParameterizedContext, message: string): void {
   ctx.body = {
     errors: [{
-      code: "ValidationError",
+      code: "VALIDATION_ERROR",
       message
     }]
   }
