@@ -19,6 +19,31 @@ This runs the Koa app directly via `app.ts` using `TS Node`.
 
 Note that there are no files emitted by TS Node as it is not required.
 
+Example valid request:
+
+```
+curl -d "{\"name\":\"Alex\",\"age\":23}" -X POST -H "Content-Type: application/json"  http://localhost:3000/users
+```
+
+Example invalid request to exercise the validator:
+
+```
+curl -d "{ \"name\":\"Alex\" ,\"not-allowed\": 12345 }" -X POST -H "Content-Type: application/json"  http://localhost:3000/users
+```
+
+Will return:
+
+```
+{
+  "errors": [
+    {
+      "code": "VALIDATION_ERROR",
+      "message": "\"not-allowed\" is not allowed"
+    }
+  ]
+}
+```
+
 ## Run this via AWS Lambda
 
 Build this package and zip it into a deployable AWS Lambda Zip. This creates a deployment package with `index.js` as the entry file and `handler` as the async entry point that lambda expects.
